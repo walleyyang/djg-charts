@@ -21,7 +21,7 @@ const puppeteerLaunchArgs = [
   '--disable-dev-shm-usage',
   '--disable-setuid-sandbox',
   '--no-sandbox',
-  `-window-size=${viewPortHeight},${viewPortWidth}`,
+  `--window-size=${viewPortHeight},${viewPortWidth}`,
 ];
 
 (async () => {
@@ -53,11 +53,11 @@ const puppeteerLaunchArgs = [
       const channel = messageObject.channel;
 
       page
-        .goto(`http://localhost:${process.env.PORT}/?${symbol}`, {
+        .goto(`${process.env.SECRET_CHARTS}:${process.env.PORT}/?${symbol}`, {
           waitUntil: 'networkidle2',
         })
         .then(() => {
-          const fileName = `${symbol}_${Date.now()}.png`;
+          const fileName = `${symbol}_${Date.now()}.jpeg`;
           const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;
 
           page
