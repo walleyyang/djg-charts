@@ -2,13 +2,14 @@ WEBSOCKET_URL=localhost
 WEBSOCKET_PORT=8080
 
 #### SECRET CHARTS ####
-SECRET_CHARTS=http://localhost
+# REACT_APP needed for dotenv in react app
+REACT_APP_SECRET_CHARTS=http://localhost
 # React needed PORT 
-PORT=3001
+REACT_APP_PORT=3001
 SECRET_CHARTS_SERVER_PORT=3002
 SECRET_CHARTS_IMAGE_LOCATION='/app/images/'
-# Dev
-# SECRET_CHARTS_IMAGE_LOCATION='C:/images/'
+# Dev without Docker
+# REACT_APP_SECRET_CHARTS_IMAGE_LOCATION='C:/images/'
 
 #### MONGO DB ####
 MONGO=localhost

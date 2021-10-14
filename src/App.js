@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     const symbol = window.location.search.substring(1).toUpperCase();
+
     fetch(
       `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.REACT_APP_SECRET_CHARTS_SERVER_PORT}/flow/${symbol}`
     )
