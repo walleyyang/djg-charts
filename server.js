@@ -53,12 +53,27 @@ const puppeteerLaunchArgs = [
           waitUntil: 'networkidle2',
         })
         .then(() => {
-          page.screenshot({
-            path: `${
-              process.env.SECRET_CHARTS_IMAGE_LOCATION
-            }${message}_${Date.now()}.png`,
-            fullPage: true,
-          });
+          const screenshot = `${
+            process.env.SECRET_CHARTS_IMAGE_LOCATION
+          }${message}_${Date.now()}.png`;
+
+          page
+            .screenshot({
+              path: screenshot,
+              fullPage: true,
+            })
+            .then(() => {
+              const imageMessage = JSON.stringify({
+                messageType: 'IMAGE',
+                imageLocation: screenshot,
+              });
+              try {
+                websocketClient.send(imageMessage);
+              } catch (err) {
+                console.log('Error occured...');
+                console.log(err);
+              }
+            });
         });
     });
   } catch (err) {
