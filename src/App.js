@@ -6,6 +6,8 @@ import FlowLineChart from './components/FlowLineChart';
 import PieChart from './components/PieChart';
 import './App.css';
 
+require('dotenv').config();
+
 class App extends Component {
   constructor() {
     super();
