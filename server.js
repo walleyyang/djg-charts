@@ -53,9 +53,12 @@ const puppeteerLaunchArgs = [
       const channel = messageObject.channel;
 
       page
-        .goto(`${process.env.SECRET_CHARTS}:${process.env.PORT}/?${symbol}`, {
-          waitUntil: 'networkidle2',
-        })
+        .goto(
+          `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.PORT}/?${symbol}`,
+          {
+            waitUntil: 'networkidle2',
+          }
+        )
         .then(() => {
           const fileName = `${symbol}_${Date.now()}.jpeg`;
           const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;

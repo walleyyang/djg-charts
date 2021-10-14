@@ -6,8 +6,6 @@ import FlowLineChart from './components/FlowLineChart';
 import PieChart from './components/PieChart';
 import './App.css';
 
-require('dotenv').config();
-
 class App extends Component {
   constructor() {
     super();
@@ -21,9 +19,8 @@ class App extends Component {
 
   componentDidMount() {
     const symbol = window.location.search.substring(1).toUpperCase();
-
     fetch(
-      `${process.env.SECRET_CHARTS}:${process.env.SECRET_CHARTS_SERVER_PORT}/flow/${symbol}`
+      `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.REACT_APP_SECRET_CHARTS_SERVER_PORT}/flow/${symbol}`
     )
       .then((res) => res.json())
       .then((flowData) =>
