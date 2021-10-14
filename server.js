@@ -54,7 +54,7 @@ const puppeteerLaunchArgs = [
 
       page
         .goto(
-          `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.REACT_APP_SECRET_CHARTS_SERVER_PORT}/?${symbol}`,
+          `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.PORT}/?${symbol}`,
           {
             waitUntil: 'networkidle2',
           }
