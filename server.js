@@ -48,14 +48,17 @@ const puppeteerLaunchArgs = [
     const page = await browser.newPage();
 
     websocketClient.on('message', (message) => {
+      const messageObject = JSON.parse(message);
+      const symbol = messageObject.symbol;
+      const channel = messageObject.channel;
+
       page
-        .goto(`http://localhost:${process.env.PORT}/?${message}`, {
+        .goto(`http://localhost:${process.env.PORT}/?${symbol}`, {
           waitUntil: 'networkidle2',
         })
         .then(() => {
-          const screenshot = `${
-            process.env.SECRET_CHARTS_IMAGE_LOCATION
-          }${message}_${Date.now()}.png`;
+          const fileName = `${symbol}_${Date.now()}.png`;
+          const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;
 
           page
             .screenshot({
@@ -65,7 +68,10 @@ const puppeteerLaunchArgs = [
             .then(() => {
               const imageMessage = JSON.stringify({
                 messageType: 'IMAGE',
+                symbol: symbol,
                 imageLocation: screenshot,
+                fileName: fileName,
+                channel: channel,
               });
               try {
                 websocketClient.send(imageMessage);
