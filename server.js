@@ -9,7 +9,7 @@ const app = express();
 
 require('dotenv').config();
 
-const port = process.env.SECRET_CHARTS_SERVER_PORT;
+const port = process.env.REACT_APP_SECRET_CHARTS_SERVER_PORT;
 const viewPortHeight = 1920;
 const viewPortWidth = 1080;
 let websocketClient;
@@ -51,7 +51,9 @@ const puppeteerLaunchArgs = [
       const messageObject = JSON.parse(message);
       const symbol = messageObject.symbol;
       const channel = messageObject.channel;
-
+      console.log(
+        `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.PORT}/?${symbol}`
+      );
       page
         .goto(
           `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.PORT}/?${symbol}`,
