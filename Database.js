@@ -23,32 +23,16 @@ class Database {
   };
 
   read = async () => {
-    // const result = await this.client
-    //   .db(this.database)
-    //   .collection('TSLA')
-    //   .find()
-    //   .toArray((err, docs) => {
-    //     console.log(docs);
-    //   });
-
     const collection = this.client
       .db(this.database)
       .collection(this.collection);
 
-    // const result = await collection.find({ symbol: data.symbol });
     const result = await collection.find({ symbol: 'TSLA' });
     if (await result.hasNext()) {
       const doc = await result.toArray();
 
       return doc;
     }
-
-    // const result = await this.client
-    //   .db(this.database)
-    //   .collection('TSLA')
-    //   .find()
-    //   .sort([['_id', 1]])
-    //   .toArray();
   };
 }
 

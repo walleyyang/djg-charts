@@ -58,8 +58,7 @@ const puppeteerLaunchArgs = [
         })
         .then(() => {
           const fileName = `${symbol}_${Date.now()}.jpeg`;
-          const screenshot = `${process.env.SECRET_CHARTS_CONTANER_IMAGE_LOCATION}${fileName}`;
-          const screenshotHost = `${process.env.SECRET_CHARTS_MOUNT_IMAGE_LOCATION}${fileName}`;
+          const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;
 
           page
             .screenshot({
@@ -70,7 +69,7 @@ const puppeteerLaunchArgs = [
               const imageMessage = JSON.stringify({
                 messageType: 'IMAGE',
                 symbol: symbol,
-                imageLocation: screenshotHost,
+                imageLocation: screenshot,
                 fileName: fileName,
                 channel: channel,
               });

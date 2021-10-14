@@ -20,7 +20,7 @@ class App extends Component {
   componentDidMount() {
     const symbol = window.location.search.substring(1).toUpperCase();
 
-    fetch(`http://localhost:3002/flow/${symbol}`)
+    fetch(`${process.env.SECRET_CHARTS}:${process.env.PORT}/flow/${symbol}`)
       .then((res) => res.json())
       .then((flowData) =>
         this.setState({ symbol: symbol, flowData: flowData })
