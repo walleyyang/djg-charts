@@ -16,29 +16,12 @@ class PieChart extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.flowData.length === 0) {
-      const flow = this.props.flowData[0].flow;
-      let bullish = 0;
-      let bearish = 0;
-
-      for (let f of flow) {
-        f.sentiment === 'BULLISH' ? (bullish += 1) : (bearish += 1);
-      }
-
-      const data = {
-        labels: [`Bullish (${bullish})`, `Bearish (${bearish})`],
-        datasets: [
-          {
-            label: 'Bullish/Bearish Sentiment',
-            data: [bullish, bearish],
-            backgroundColor: ['Green', 'Red'],
-          },
-        ],
-      };
-
       this.setState({
-        totalBullish: bullish,
-        totalBearish: bearish,
-        data: data,
+        totalBullish:
+          this.props.flowData[0].chartData.sentimentCount.totalBullish,
+        totalBearish:
+          this.props.flowData[0].chartData.sentimentCount.totalBearish,
+        data: this.props.flowData[0].chartData.sentimentCount.data,
       });
     }
   }

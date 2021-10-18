@@ -22,12 +22,12 @@ class Database {
     }
   };
 
-  read = async () => {
+  read = async (symbol) => {
     const collection = this.client
       .db(this.database)
       .collection(this.collection);
 
-    const result = await collection.find({ symbol: 'TSLA' });
+    const result = await collection.find({ symbol: symbol });
     if (await result.hasNext()) {
       const doc = await result.toArray();
 
