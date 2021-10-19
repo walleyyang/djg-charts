@@ -46,7 +46,7 @@ class Strikes extends Component {
 
     return (
       <div className="strikes">
-        <Bar data={this.state.strikes} options={options} />
+        <Bar id="strikes-chart" data={this.state.strikes} options={options} />
       </div>
     );
   }

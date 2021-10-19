@@ -60,28 +60,35 @@ const puppeteerLaunchArgs = [
           }
         )
         .then(() => {
-          const fileName = `${symbol}_${Date.now()}.jpeg`;
-          const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;
-
+          // Eh... still only works sometimes
           page
-            .screenshot({
-              path: screenshot,
-              fullPage: true,
+            .waitForSelector('#strikes-chart', {
+              visibile: true,
             })
             .then(() => {
-              const imageMessage = JSON.stringify({
-                messageType: 'IMAGE',
-                symbol: symbol,
-                imageLocation: screenshot,
-                fileName: fileName,
-                channel: channel,
-              });
-              try {
-                websocketClient.send(imageMessage);
-              } catch (err) {
-                console.log('Error occured...');
-                console.log(err);
-              }
+              const fileName = `${symbol}_${Date.now()}.jpeg`;
+              const screenshot = `${process.env.SECRET_CHARTS_IMAGE_LOCATION}${fileName}`;
+
+              page
+                .screenshot({
+                  path: screenshot,
+                  fullPage: true,
+                })
+                .then(() => {
+                  const imageMessage = JSON.stringify({
+                    messageType: 'IMAGE',
+                    symbol: symbol,
+                    imageLocation: screenshot,
+                    fileName: fileName,
+                    channel: channel,
+                  });
+                  try {
+                    websocketClient.send(imageMessage);
+                  } catch (err) {
+                    console.log('Error occured...');
+                    console.log(err);
+                  }
+                });
             });
         });
     });
