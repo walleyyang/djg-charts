@@ -30,24 +30,46 @@ class LatestFLow extends Component {
     const bearIcon = 'https://i.imgur.com/OWXP4Yv.png';
     const maxLatestToDisplay = 10;
 
-    for (let i = 0; i < maxLatestToDisplay; i++) {
-      const sentiment = flow[i].sentiment;
-      const icon = sentiment === 'BULLISH' ? bullIcon : bearIcon;
-      rows.unshift(
-        <tr key={i}>
-          <td>
-            <img className="icon" src={icon} alt={sentiment} />
-            {sentiment}
-          </td>
-          <td>{flow[i].value}</td>
-          <td>{flow[i].position}</td>
-          <td>{flow[i].details}</td>
-          <td>{flow[i].type}</td>
-          <td>{flow[i].strike}</td>
-          <td>{flow[i].expiration}</td>
-          <td>{flow[i].time}</td>
-        </tr>
-      );
+    if (flow.length < maxLatestToDisplay) {
+      for (let i = 0; i < flow.length; i++) {
+        const sentiment = flow[i].sentiment;
+        const icon = sentiment === 'BULLISH' ? bullIcon : bearIcon;
+        rows.unshift(
+          <tr key={i}>
+            <td>
+              <img className="icon" src={icon} alt={sentiment} />
+              {sentiment}
+            </td>
+            <td>{flow[i].value}</td>
+            <td>{flow[i].position}</td>
+            <td>{flow[i].details}</td>
+            <td>{flow[i].type}</td>
+            <td>{flow[i].strike}</td>
+            <td>{flow[i].expiration}</td>
+            <td>{flow[i].time}</td>
+          </tr>
+        );
+      }
+    } else {
+      for (let i = 0; i < maxLatestToDisplay; i++) {
+        const sentiment = flow[i].sentiment;
+        const icon = sentiment === 'BULLISH' ? bullIcon : bearIcon;
+        rows.unshift(
+          <tr key={i}>
+            <td>
+              <img className="icon" src={icon} alt={sentiment} />
+              {sentiment}
+            </td>
+            <td>{flow[i].value}</td>
+            <td>{flow[i].position}</td>
+            <td>{flow[i].details}</td>
+            <td>{flow[i].type}</td>
+            <td>{flow[i].strike}</td>
+            <td>{flow[i].expiration}</td>
+            <td>{flow[i].time}</td>
+          </tr>
+        );
+      }
     }
 
     return rows;

@@ -17,34 +17,9 @@ class FlowLineChart extends Component {
   }
 
   createData = (flow) => {
-    const labels = [];
-    const sentiment = [];
-    let sentimentCounter = 0;
-
-    for (var i = flow.length - 1; i >= 0; i--) {
-      labels.unshift(i + 1);
-
-      if (flow[i].sentiment === 'BULLISH') {
-        sentimentCounter += 1;
-      } else {
-        sentimentCounter -= 1;
-      }
-
-      sentiment.push(sentimentCounter);
-    }
-
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Flow',
-          data: sentiment,
-          backgroundColor: ['Blue'],
-        },
-      ],
-    };
-
-    this.setState({ flow: data });
+    this.setState({
+      flow: this.props.flowData[0].chartData.flowSentimentOverTime,
+    });
   };
 
   render() {

@@ -12,39 +12,9 @@ class Strikes extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.flowData.length === 0) {
-      this.createData(this.props.flowData[0].strikes);
+      this.setState({ strikes: this.props.flowData[0].chartData.strikes });
     }
   }
-
-  createData = (strikes) => {
-    const labels = [];
-    const callsValue = [];
-    const putsValue = [];
-
-    for (let strike of strikes) {
-      labels.push(strike.strike);
-      callsValue.push(strike.callsValue);
-      putsValue.push(strike.putsValue);
-    }
-
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Bullish Sentiment',
-          data: callsValue,
-          backgroundColor: ['Green'],
-        },
-        {
-          label: 'Bearish Sentiment',
-          data: putsValue,
-          backgroundColor: ['Red'],
-        },
-      ],
-    };
-
-    this.setState({ strikes: data });
-  };
 
   render() {
     const options = {

@@ -24,9 +24,9 @@ class App extends Component {
       `${process.env.REACT_APP_SECRET_CHARTS}:${process.env.REACT_APP_SECRET_CHARTS_SERVER_PORT}/flow/${symbol}`
     )
       .then((res) => res.json())
-      .then((flowData) =>
-        this.setState({ symbol: symbol, flowData: flowData })
-      );
+      .then((flowData) => {
+        this.setState({ symbol: symbol, flowData: flowData });
+      });
   }
 
   render() {
