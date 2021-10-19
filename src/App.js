@@ -25,7 +25,6 @@ class App extends Component {
     )
       .then((res) => res.json())
       .then((flowData) => {
-        console.log(flowData);
         this.setState({ symbol: symbol, flowData: flowData });
       });
   }
